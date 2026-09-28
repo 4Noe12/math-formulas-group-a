@@ -35,4 +35,22 @@ public final class Formulas {
 
         return 2 * a + 2 * b;
     }
+
+	// --- Square ---
+	/**
+	 *
+	 * @param a length and width
+	 * @return area of a square
+	 */
+	public static Double calculateSquareArea( Double a) {
+		if( a == null ) return null;
+
+		return a * a;
+	}
+
+	public static Double calculateSquarePerimeter( Double a) {
+		if( a == null ) return null;
+
+		return 4 * a;
+	}
 }
