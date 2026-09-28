@@ -50,7 +50,7 @@
             {
               "key": "password",
               "type": "string",
-              "value": "{{auth_password_0b7b}}"
+              "value": "{{auth_password}}"
             }
           ],
           "type": "basic"
@@ -95,7 +95,7 @@
             {
               "key": "password",
               "type": "string",
-              "value": "{{auth_password_0b7b}}"
+              "value": "{{auth_password}}"
             }
           ],
           "type": "basic"
@@ -140,7 +140,7 @@
             {
               "key": "password",
               "type": "string",
-              "value": "{{auth_password_0b7b}}"
+              "value": "{{auth_password}}"
             }
           ],
           "type": "basic"
