@@ -39,7 +39,7 @@ public final class Formulas {
 	// --- Square ---
 	/**
 	 *
-	 * @param a length and width
+	 * @param a side length
 	 * @return area of a square
 	 */
 	public static Double calculateSquareArea( Double a) {
@@ -48,6 +48,11 @@ public final class Formulas {
 		return a * a;
 	}
 
+    /**
+     *
+     * @param a side length
+     * @return perimeter of a square
+     */
 	public static Double calculateSquarePerimeter( Double a) {
 		if( a == null ) return null;
 
