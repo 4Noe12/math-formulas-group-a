@@ -33,7 +33,7 @@
           "path": [
             "get"
           ],
-          "raw": "postman-echo.com/get"
+          "raw": "http://localhost:8888/v1/square"
         }
       },
       "response": []
