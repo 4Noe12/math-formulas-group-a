@@ -41,4 +41,24 @@ class FormulasTest {
                 () -> assertNull( Formulas.calculateRectanglePerimeter( 3.0, null ) )
         );
     }
+
+    @Test
+    void calculateSquareArea() {
+        assertEquals( 16.0, Formulas.calculateSquareArea( 4.0 ) );
+    }
+
+    @Test
+    void calculateSquareAreaFailed() {
+        assertNull( Formulas.calculateSquareArea( null ) );
+    }
+
+    @Test
+    void calculateSquarePerimeter() {
+        assertEquals( 16.0, Formulas.calculateSquarePerimeter( 4.0 ) );
+    }
+
+    @Test
+    void calculateSquarePerimeterFailed() {
+        assertNull(Formulas.calculateSquarePerimeter(null));
+    }
 }
