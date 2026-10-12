@@ -1,0 +1,11 @@
+docker login container-registry.gugel.dev
+
+maven -> package 
+
+docker build -t math-formulas:v1.1 -f ./src/main/docker/Dockerfile.jvm .
+
+docker tag math-formulas:v1.1 container-registry.gugel.dev/group7/math-formulas:v1.1
+
+docker push container-registry.gugel.dev/group7/math-formulas:v1.1
+
+
