@@ -5,7 +5,7 @@
   "summary": {
     "title": "Threat Model",
     "owner": "Group A",
-    "description": "",
+    "description": "Der Farb-Rechner ist eine webbasierte Anwendung für Malerbetriebe und Privatpersonen zur Berechnung von Flächen, Umfängen und benötigten Farbmengen.\n\nBenutzer geben die erforderlichen Maße und Farbparameter über eine Weboberfläche ein. Das Backend verarbeitet die Anfragen und übergibt die Berechnungsparameter an einen Berechnungsservice. Die Ergebnisse können angezeigt und als PDF exportiert werden.\n\nIm Rahmen der Erweiterung um Speicherung und Wiederabruf können Berechnungsergebnisse dauerhaft in einer Datenbank gespeichert werden. Benutzer erhalten einen individuellen Abruf-Link, über den sie ihre gespeicherten Berechnungen zu einem späteren Zeitpunkt erneut aufrufen können. Eine Benutzeranmeldung ist im betrachteten Szenario nicht vorgesehen.\n\nDas Threat Model untersucht die Bedrohungen der Webanwendung mit besonderem Schwerpunkt auf der Integrität, Vertraulichkeit und Verfügbarkeit gespeicherter Berechnungsergebnisse. Im Fokus stehen insbesondere unberechtigte Datenzugriffe, manipulierte Berechnungsparameter, die Offenlegung von Abruf-Links und die Überlastung des Systems.\n\nDie technische Datenbanksicherung und Wiederherstellung nach einem vollständigen Systemausfall sind nicht Bestandteil des betrachteten Funktionsumfangs.",
     "id": 0
   },
   "detail": {
