@@ -21,16 +21,16 @@
         "cells": [
           {
             "position": {
-              "x": 1050,
-              "y": 195
+              "x": 895,
+              "y": 184.9999999999995
             },
             "size": {
-              "width": 240,
-              "height": 130
+              "width": 570,
+              "height": 150
             },
             "attrs": {
               "label": {
-                "text": "Browser"
+                "text": "Client / Browser \n(nicht vertrauenswürdige Umgebung)"
               }
             },
             "visible": true,
@@ -39,7 +39,7 @@
             "id": "95d218aa-11f8-49e0-b8b6-1072898e1b60",
             "data": {
               "type": "tm.BoundaryBox",
-              "name": "Browser",
+              "name": "Client / Browser \n(nicht vertrauenswürdige Umgebung)",
               "description": "",
               "isTrustBoundary": true,
               "hasOpenThreats": false,
@@ -63,7 +63,7 @@
             },
             "attrs": {
               "label": {
-                "text": "Backend / Serv"
+                "text": "Backend / Anwendungsserver \n(serverseitige Verarbeitung)"
               }
             },
             "visible": true,
@@ -72,7 +72,7 @@
             "id": "6aa26876-aff9-467c-92b3-c7da6e1c0be3",
             "data": {
               "type": "tm.BoundaryBox",
-              "name": "Backend / Server",
+              "name": "Backend / Anwendungsserver \n(serverseitige Verarbeitung)",
               "description": "",
               "isTrustBoundary": true,
               "hasOpenThreats": false,
@@ -219,8 +219,8 @@
                 "text": "Backend/API"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -317,12 +317,99 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "957c162e-6e57-4d7e-9d96-35291fc5f952",
+                  "title": "T01 – Manipulation von Berechnungsparametern",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "Ein Benutzer übermittelt manipulierte oder ungültige Berechnungsparameter direkt über die API, ohne die Eingabekontrollen der Web-UI zu verwenden.",
+                  "mitigation": "Serverseitige Eingabevalidierung, Wertebereichsprüfung und Fehlerbehandlung.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 1,
+                  "score": ""
+                },
+                {
+                  "id": "99c5880b-402a-486e-ab6a-d22f9d5c8216",
+                  "title": "Überlastung durch zahlreiche Anfragen",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Denial of service",
+                  "description": "",
+                  "mitigation": "",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 4,
+                  "score": ""
+                },
+                {
+                  "id": "a2b9271e-0fdf-4f1b-a137-b3003f9db642",
+                  "title": "Unberechtigter Abruf fremder Ergebnisse (IDOR)",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Information disclosure",
+                  "description": "Ein Angreifer versucht durch Erraten oder Manipulieren einer Berechnungs-ID auf gespeicherte Berechnungsergebnisse anderer Benutzer zuzugreifen. Wird die Berechtigung nicht ausreichend geprüft, können fremde Ergebnisse ohne Zustimmung abgerufen werden (IDOR).",
+                  "mitigation": "Verwendung kryptografisch zufälliger, ausreichend langer Zugriffstokens. Interne Berechnungs-IDs allein berechtigen nicht zum Abruf. Serverseitige Tokenprüfung bei jedem Zugriff, Rate Limiting und Schutz vor der unbeabsichtigten Offenlegung von Zugriffstokens.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 7,
+                  "score": ""
+                },
+                {
+                  "id": "fe757cfd-20a2-4878-8bf8-cd76f58b5f21",
+                  "title": "Unberechtigte Änderung einer gespeicherten Berechnung",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "Ein Angreifer verändert gespeicherte Berechnungsergebnisse über eine unzureichend abgesicherte API. Dadurch können falsche Flächen-, Umfangs- oder Farbbedarfswerte gespeichert und später abgerufen oder als PDF exportiert werden.",
+                  "mitigation": "Serverseitige Berechtigungsprüfung bei jeder Änderung, Trennung von Lese- und Schreibberechtigungen, Eingabevalidierung und Verwendung parametrisierter Datenbankabfragen. Gespeicherte Berechnungsergebnisse nach Möglichkeit unveränderlich gestalten.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 9,
+                  "score": ""
+                },
+                {
+                  "id": "1e14fe0b-5103-45d3-bfc7-e84b228bf068",
+                  "title": "Fehlende Nachvollziehbarkeit von Änderungen",
+                  "status": "Open",
+                  "severity": "Low",
+                  "type": "Repudiation",
+                  "description": "Änderungen an gespeicherten Berechnungsergebnissen werden nicht ausreichend protokolliert. Dadurch kann im Nachhinein nicht nachvollzogen werden, wann und wodurch eine Berechnung verändert wurde.",
+                  "mitigation": "Protokollierung sicherheitsrelevanter Änderungen mit Zeitstempel, Berechnungs-ID und Art der Aktion. Schutz der Protokolle vor unberechtigten Veränderungen. Zugriffstokens und andere sensible Informationen dürfen nicht protokolliert werden.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 10,
+                  "score": ""
+                },
+                {
+                  "id": "c490e7fa-0c74-41a2-80f0-ad665a1f7fe8",
+                  "title": "Massenhaftes Erraten oder Abfragen von Berechnungs-IDs",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Denial of service",
+                  "description": "Ein Angreifer sendet automatisiert zahlreiche Abrufanfragen mit unterschiedlichen Berechnungs-IDs an das Backend. Die dabei entstehende hohe Anzahl von Datenbankzugriffen kann die Systemressourcen überlasten und die Verfügbarkeit des Farb-Rechners beeinträchtigen.",
+                  "mitigation": "Rate Limiting für API-Anfragen, Begrenzung gleichzeitiger Datenbankabfragen, Timeouts sowie Überwachung ungewöhnlich hoher Anfragezahlen. Ungültige Abrufanfragen ressourcenschonend verarbeiten.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 11,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 0,
+                "tampering": 5,
+                "repudiation": 2,
+                "informationDisclosure": 2,
+                "denialOfService": 4,
+                "elevationOfPrivilege": 0
+              }
             }
           },
           {
@@ -448,7 +535,7 @@
           {
             "position": {
               "x": 1300,
-              "y": 590
+              "y": 630
             },
             "size": {
               "width": 150,
@@ -459,8 +546,8 @@
                 "text": "PDF-Export"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -557,18 +644,40 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "cd484161-8863-4a62-89b4-e986d9f22093",
+                  "title": "Manipulation von Exportdaten",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "",
+                  "mitigation": "",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 5,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 0,
+                "tampering": 1,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 0
+              }
             }
           },
           {
             "position": {
               "x": 1120,
-              "y": 730
+              "y": 710
             },
             "size": {
               "width": 120,
@@ -579,11 +688,13 @@
                 "text": "Datenbank"
               },
               "topLine": {
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               },
               "bottomLine": {
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -680,19 +791,52 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isALog": false,
               "isEncrypted": false,
               "isSigned": false,
               "storesCredentials": false,
               "storesInventory": false,
-              "threats": []
+              "threats": [
+                {
+                  "id": "010578e2-6790-447c-ae4f-92010463c97e",
+                  "title": "Unberechtigter Datenbankzugriff",
+                  "status": "Open",
+                  "severity": "Low",
+                  "type": "Information disclosure",
+                  "description": "Unberechtigte Personen können durch fehlende oder fehlerhafte Zugriffskontrollen auf gespeicherte Berechnungen und gegebenenfalls Rechnungs- oder Kundendaten zugreifen.",
+                  "mitigation": "Zugriff auf die Datenbank ausschließlich über das Backend, restriktive Datenbankberechtigungen, sichere Speicherung von Zugangsdaten und serverseitige Zugriffskontrollen.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 2,
+                  "score": ""
+                },
+                {
+                  "id": "509cf8fc-9ebc-4cb8-95f1-2c4731ea5787",
+                  "title": "Manipulation gespeicherter Berechnungsergebnisse",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "Ein Angreifer verändert gespeicherte Berechnungsergebnisse durch unberechtigten Datenbankzugriff oder eine Schwachstelle im Backend. Dadurch können beim erneuten Abrufen falsche Flächen-, Umfangs- oder Farbbedarfswerte angezeigt beziehungsweise exportiert werden.",
+                  "mitigation": "Datenbankzugriff ausschließlich über das Backend, minimale Datenbankberechtigungen, parametrisierte Datenbankabfragen und serverseitige Prüfung gespeicherter Werte.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 3,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "tampering": 1,
+                "repudiation": 0,
+                "informationDisclosure": 2,
+                "denialOfService": 0
+              }
             }
           },
           {
             "position": {
               "x": 1125,
-              "y": 225
+              "y": 235
             },
             "size": {
               "width": 110,
@@ -703,8 +847,8 @@
                 "text": "Web-UI"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -801,24 +945,47 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "b3cb357e-cee2-4862-b695-35343804e6d8",
+                  "title": "Unbeabsichtigte Weitergabe des Zugriffstokens",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Information disclosure",
+                  "description": "Ein individueller Abruf-Link mit Zugriffstoken wird unbeabsichtigt an Dritte weitergegeben, beispielsweise über den Browserverlauf, Protokolldateien oder das Teilen des Links. Dadurch können Unbefugte gespeicherte Berechnungsergebnisse einsehen.",
+                  "mitigation": "HTTPS verwenden, Zugriffstokens nicht in Protokolldateien speichern, Referrer-Policy auf no-referrer setzen und die Gültigkeitsdauer der Abruf-Links begrenzen. Zugriffstokens ausreichend zufällig und lang generieren.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 8,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 0,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 2,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 0
+              }
             }
           },
           {
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
                 "sourceMarker": {
-                  "name": ""
+                  "name": "block"
                 },
                 "strokeDasharray": null
               }
@@ -829,23 +996,42 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Benutzereingaben / Ergebnisse",
+              "name": "Benutzereingaben / Ergebnisse\nPDF-Download",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
+              "hasOpenThreats": true,
+              "isBidirectional": true,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": [],
+              "threats": [
+                {
+                  "id": "7bf8d3e5-5787-4e97-8a07-b3ae1d880ab9",
+                  "title": "Offenlegung exportierter Berechnungen",
+                  "status": "Open",
+                  "severity": "Low",
+                  "type": "Information disclosure",
+                  "description": "Provide a description for this threat",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 6,
+                  "score": ""
+                }
+              ],
               "trustBoundaryIds": [
                 "95d218aa-11f8-49e0-b8b6-1072898e1b60"
-              ]
+              ],
+              "threatFrequency": {
+                "tampering": 0,
+                "informationDisclosure": 1,
+                "denialOfService": 0
+              }
             },
             "labels": [
-              "Benutzereingaben / Ergebnisse"
+              "Benutzereingaben / Ergebnisse\nPDF-Download"
             ],
             "id": "d7608599-bb48-4434-9790-b87a8c513554",
             "source": {
@@ -867,7 +1053,7 @@
                   "name": "block"
                 },
                 "sourceMarker": {
-                  "name": ""
+                  "name": "block"
                 },
                 "strokeDasharray": null
               }
@@ -878,13 +1064,13 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "HTTPS: Berechnungsanfrage / Antwort",
+              "name": "HTTPS: Berechnen, Speichern, Abruf per ID / Ergebnis",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
               "hasOpenThreats": false,
-              "isBidirectional": false,
+              "isBidirectional": true,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
@@ -895,7 +1081,7 @@
               ]
             },
             "labels": [
-              "HTTPS: Berechnungsanfrage / Antwort"
+              "HTTPS: Berechnen, Speichern, Abruf per ID / Ergebnis"
             ],
             "id": "0d59e359-850b-42dc-8810-a6d9b6cef51f",
             "source": {
@@ -917,74 +1103,7 @@
                   "name": "block"
                 },
                 "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Parameter / Berechnungsergebnis",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
-            },
-            "labels": [
-              "Parameter / Berechnungsergebnis"
-            ],
-            "id": "ec63ed07-a969-4ed8-b99d-e5a31d2e243f",
-            "source": {
-              "x": 1130,
-              "y": 520
-            },
-            "target": {
-              "cell": "1300582a-5f80-42b7-806d-fdbeb60986db",
-              "port": "ba63f405-3577-4932-bca9-f17b77f7f55e"
-            },
-            "vertices": [
-              {
-                "x": 950,
-                "y": 560
-              }
-            ],
-            "tools": {
-              "items": [
-                "boundary",
-                "button-remove",
-                "vertices",
-                "source-arrowhead",
-                "target-arrowhead",
-                "boundary",
-                "button-remove",
-                "vertices",
-                "source-arrowhead",
-                "target-arrowhead"
-              ],
-              "name": null
-            }
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
                   "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
                 },
                 "strokeDasharray": null
               }
@@ -1001,7 +1120,7 @@
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
               "hasOpenThreats": false,
-              "isBidirectional": false,
+              "isBidirectional": true,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
@@ -1021,7 +1140,13 @@
             "target": {
               "cell": "e4729109-0551-4dd3-9e45-c19302db729b",
               "port": "ba63f405-3577-4932-bca9-f17b77f7f55e"
-            }
+            },
+            "vertices": [
+              {
+                "x": 1320,
+                "y": 600
+              }
+            ]
           },
           {
             "shape": "flow",
@@ -1032,7 +1157,7 @@
                   "name": "block"
                 },
                 "sourceMarker": {
-                  "name": ""
+                  "name": "block"
                 },
                 "strokeDasharray": null
               }
@@ -1043,13 +1168,13 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Speichern / Laden",
+              "name": "Berechnungsergebnisse + \nAbruf-ID speichern / \nBerechnung per ID abrufen",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
               "hasOpenThreats": false,
-              "isBidirectional": false,
+              "isBidirectional": true,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
@@ -1059,7 +1184,7 @@
               ]
             },
             "labels": [
-              "Speichern / Laden"
+              "Berechnungsergebnisse + \nAbruf-ID speichern / \nBerechnung per ID abrufen"
             ],
             "id": "858eecad-d3cb-41a9-b5d8-88e42cc410a2",
             "source": {
@@ -1069,6 +1194,423 @@
             "target": {
               "cell": "920fe4c4-02ca-4ab0-8f2e-4c189747d9f0",
               "port": "600743fe-28ea-4cd4-a5ef-a393b7013e31"
+            },
+            "vertices": []
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": "block"
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Parameter / \nBerechnungsergebnis",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": true,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Parameter / \nBerechnungsergebnis"
+            ],
+            "id": "01336bf1-a174-411c-ac2d-a0ea2d742d90",
+            "source": {
+              "x": 1130,
+              "y": 520
+            },
+            "target": {
+              "cell": "1300582a-5f80-42b7-806d-fdbeb60986db",
+              "port": "ba63f405-3577-4932-bca9-f17b77f7f55e"
+            },
+            "vertices": [
+              {
+                "x": 1050,
+                "y": 580
+              }
+            ]
+          },
+          {
+            "position": {
+              "x": 1876.9999999999995,
+              "y": 510
+            },
+            "size": {
+              "width": 140,
+              "height": 130
+            },
+            "attrs": {
+              "text": {
+                "text": "Speichern/\nWiederherstellen"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "b70dfe72-ee34-403c-859b-1505878720f9"
+                },
+                {
+                  "group": "right",
+                  "id": "7be02adb-0f31-4bb1-9d61-7c4b3299cc1c"
+                },
+                {
+                  "group": "bottom",
+                  "id": "65747ec2-ab94-4141-8464-4e090a48246d"
+                },
+                {
+                  "group": "left",
+                  "id": "a7eb69c7-21f9-4bab-b547-7de8400cfec3"
+                }
+              ]
+            },
+            "id": "f0165f85-bb00-4e59-aed7-779ed556fc7a",
+            "zIndex": 11,
+            "data": {
+              "type": "tm.Process",
+              "name": "Speichern/\nWiederherstellen",
+              "description": "Berechnung speichern und über ID/Link laden",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": false,
+              "privilegeLevel": "",
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": 1617,
+              "y": 520
+            },
+            "size": {
+              "width": 120,
+              "height": 110
+            },
+            "attrs": {
+              "text": {
+                "text": "Backup-Service"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "b70dfe72-ee34-403c-859b-1505878720f9"
+                },
+                {
+                  "group": "right",
+                  "id": "7be02adb-0f31-4bb1-9d61-7c4b3299cc1c"
+                },
+                {
+                  "group": "bottom",
+                  "id": "65747ec2-ab94-4141-8464-4e090a48246d"
+                },
+                {
+                  "group": "left",
+                  "id": "a7eb69c7-21f9-4bab-b547-7de8400cfec3"
+                }
+              ]
+            },
+            "id": "fe1972d4-f6e3-4916-a822-0d17e0b5c30e",
+            "zIndex": 12,
+            "data": {
+              "type": "tm.Process",
+              "name": "Backup-Service",
+              "description": "Regelmäßige Sicherung der Datenbank",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": false,
+              "privilegeLevel": "",
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": 1737,
+              "y": 710
+            },
+            "size": {
+              "width": 120,
+              "height": 60
+            },
+            "attrs": {
+              "text": {
+                "text": "Backup-Speicher"
+              },
+              "topLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              },
+              "bottomLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "store",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "b5c31280-374a-4585-a5dc-416dd8a70211"
+                },
+                {
+                  "group": "right",
+                  "id": "d7e5e0bf-83c6-48a3-939a-fdd8a8a4adad"
+                },
+                {
+                  "group": "bottom",
+                  "id": "3790433b-7596-4fb7-9e54-00c0027bebff"
+                },
+                {
+                  "group": "left",
+                  "id": "1170be13-f8ef-4aab-ac0f-268eceba1a74"
+                }
+              ]
+            },
+            "id": "2d338fc7-d5ff-4396-9b8f-8b4510cdf320",
+            "zIndex": 13,
+            "data": {
+              "type": "tm.Store",
+              "name": "Backup-Speicher",
+              "description": "Getrennte Aufbewahrung der Sicherungskopien",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isALog": false,
+              "isEncrypted": false,
+              "isSigned": false,
+              "storesCredentials": false,
+              "storesInventory": false,
+              "threats": []
             }
           }
         ],
@@ -1077,6 +1619,6 @@
     ],
     "diagramTop": 1,
     "reviewer": "Group A",
-    "threatTop": 0
+    "threatTop": 11
   }
 }
