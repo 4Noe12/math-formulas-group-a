@@ -105,8 +105,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "f5bb694a-1c40-46ee-a85c-fc369b80e4a7",
             "zIndex": -1,
+            "id": "f5bb694a-1c40-46ee-a85c-fc369b80e4a7",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Out of Scope",
@@ -433,16 +433,51 @@
                   "new": false,
                   "number": 11,
                   "score": ""
+                },
+                {
+                  "id": "56da3cac-3cae-4f6b-969f-1b83ffe8a6c5",
+                  "title": "Daten der Backup Datei verändert",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Manipulation",
+                  "description": "die Daten der Backup Datei werden verändert bevor sie zurückgespielt werden, der Rechner zeigt zu wenige Gebinde, was zu einer zweiten Fahrt zum Baumarkt führt",
+                  "mitigation": "Backup signieren",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 13,
+                  "score": ""
+                },
+                {
+                  "id": "121f53d9-bef9-4059-81ac-5191a40976ef",
+                  "title": "Restore überschreibt fremde Daten",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Erhöhung von Rechten",
+                  "description": "Ein präpariertes Backup mit fremden Nutzer-IDs oder Produktdaten überschreibt Daten anderer Nutzer oder den Produktkatalog, weil der Restore mit vollen Datenbankrechten läuft.",
+                  "mitigation": "Neuer Datenbankeintrag und Pin bei Änderung der Daten",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 14,
+                  "score": ""
                 }
               ],
               "threatFrequency": {
                 "spoofing": 0,
-                "tampering": 5,
+                "tampering": 6,
                 "repudiation": 2,
                 "informationDisclosure": 2,
                 "denialOfService": 4,
-                "elevationOfPrivilege": 0
+                "elevationOfPrivilege": 1
               }
+            },
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove",
+                "boundary",
+                "button-remove"
+              ],
+              "name": null
             }
           },
           {
@@ -1310,6 +1345,7 @@
             },
             "visible": true,
             "shape": "store",
+            "zIndex": 11,
             "ports": {
               "groups": {
                 "top": {
@@ -1393,7 +1429,6 @@
               ]
             },
             "id": "9b79d36b-b9f5-4d45-a7df-f6df143d9fce",
-            "zIndex": 11,
             "data": {
               "type": "tm.Store",
               "name": "Cloud",
@@ -1465,6 +1500,6 @@
     ],
     "diagramTop": 1,
     "reviewer": "Group A",
-    "threatTop": 11
+    "threatTop": 14
   }
 }
