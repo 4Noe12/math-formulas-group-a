@@ -79,12 +79,45 @@
               "crossingFlows": [
                 "0d59e359-850b-42dc-8810-a6d9b6cef51f",
                 "2c84ea9b-cc33-44a3-8172-ee38d196fcde",
-                "858eecad-d3cb-41a9-b5d8-88e42cc410a2"
+                "858eecad-d3cb-41a9-b5d8-88e42cc410a2",
+                "5e407594-a0a0-408b-92dd-d67057bfa656"
               ],
               "containedElements": [
                 "4b58276d-1db5-4fcb-8aa4-539fd2ce3187",
                 "e4729109-0551-4dd3-9e45-c19302db729b",
                 "920fe4c4-02ca-4ab0-8f2e-4c189747d9f0"
+              ]
+            }
+          },
+          {
+            "position": {
+              "x": 1663,
+              "y": 650
+            },
+            "size": {
+              "width": 190,
+              "height": 130
+            },
+            "attrs": {
+              "label": {
+                "text": "Out of Scope"
+              }
+            },
+            "visible": true,
+            "shape": "trust-boundary-box",
+            "id": "f5bb694a-1c40-46ee-a85c-fc369b80e4a7",
+            "zIndex": -1,
+            "data": {
+              "type": "tm.BoundaryBox",
+              "name": "Out of Scope",
+              "description": "",
+              "isTrustBoundary": true,
+              "hasOpenThreats": false,
+              "crossingFlows": [
+                "5e407594-a0a0-408b-92dd-d67057bfa656"
+              ],
+              "containedElements": [
+                "9b79d36b-b9f5-4d45-a7df-f6df143d9fce"
               ]
             }
           },
@@ -1252,6 +1285,179 @@
                 "y": 580
               }
             ]
+          },
+          {
+            "position": {
+              "x": 1698,
+              "y": 710
+            },
+            "size": {
+              "width": 120,
+              "height": 60
+            },
+            "attrs": {
+              "text": {
+                "text": "Cloud"
+              },
+              "topLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              },
+              "bottomLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "store",
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "93177d98-6441-42fb-8ef3-8ef1b09c60d5"
+                },
+                {
+                  "group": "right",
+                  "id": "f9df3f82-22bb-48ad-a40a-5a5ae636b96e"
+                },
+                {
+                  "group": "bottom",
+                  "id": "d1836950-bfef-4026-8513-6c57037f90b5"
+                },
+                {
+                  "group": "left",
+                  "id": "50b35fdf-d492-4803-b373-4e15312f9cb7"
+                }
+              ]
+            },
+            "id": "9b79d36b-b9f5-4d45-a7df-f6df143d9fce",
+            "zIndex": 11,
+            "data": {
+              "type": "tm.Store",
+              "name": "Cloud",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isALog": false,
+              "isEncrypted": false,
+              "isSigned": false,
+              "storesCredentials": false,
+              "storesInventory": false,
+              "threats": []
+            }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": "block"
+                },
+                "strokeDasharray": "4 3"
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 12,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Berechnungsergebnisse + \nAbruf-ID speichern / \nBerechnung per ID abrufen",
+              "description": "",
+              "outOfScope": true,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "wird nicht betreut",
+              "hasOpenThreats": false,
+              "isBidirectional": true,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": [
+                "6aa26876-aff9-467c-92b3-c7da6e1c0be3",
+                "f5bb694a-1c40-46ee-a85c-fc369b80e4a7"
+              ]
+            },
+            "labels": [
+              "Berechnungsergebnisse + \nAbruf-ID speichern / \nBerechnung per ID abrufen"
+            ],
+            "id": "5e407594-a0a0-408b-92dd-d67057bfa656",
+            "source": {
+              "cell": "920fe4c4-02ca-4ab0-8f2e-4c189747d9f0",
+              "port": "99f17b39-de94-471e-a954-99f6eaf1604b"
+            },
+            "target": {
+              "cell": "9b79d36b-b9f5-4d45-a7df-f6df143d9fce",
+              "port": "50b35fdf-d492-4803-b373-4e15312f9cb7"
+            }
           }
         ],
         "description": "Farb-Rechner"
