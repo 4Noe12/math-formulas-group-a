@@ -346,7 +346,7 @@
             "data": {
               "type": "tm.Process",
               "name": "Backend/API",
-              "description": "",
+              "description": "Backup-Berechtigung prüfen / Restore-Daten validieren",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
@@ -375,8 +375,8 @@
                   "status": "Open",
                   "severity": "Medium",
                   "type": "Denial of service",
-                  "description": "",
-                  "mitigation": "",
+                  "description": "Viele Anfragen überlasten den Service.\nVon außen automatisierbar.",
+                  "mitigation": "Rate Limits, Timeouts und Begrenzung\nparalleler Berechnungen serverseitig\numsetzen.",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 4,
@@ -466,18 +466,9 @@
                 "tampering": 6,
                 "repudiation": 2,
                 "informationDisclosure": 2,
-                "denialOfService": 4,
+                "denialOfService": 5,
                 "elevationOfPrivilege": 1
               }
-            },
-            "tools": {
-              "items": [
-                "boundary",
-                "button-remove",
-                "boundary",
-                "button-remove"
-              ],
-              "name": null
             }
           },
           {
@@ -724,8 +715,8 @@
                   "status": "Open",
                   "severity": "Medium",
                   "type": "Tampering",
-                  "description": "",
-                  "mitigation": "",
+                  "description": "Manipulierte Exportdaten können PDFs\nmit falschen Flaechen- und Farbwerten\nerzeugen. Gezielte Manipulation der\nExportanfrage erforderlich.",
+                  "mitigation": "PDF ausschliesslich aus serverseitig\nvalidierten Berechnungsergebnissen\nerstellen; Werte vor dem Export erneut\nprüfen.",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 5,
@@ -855,7 +846,7 @@
             "data": {
               "type": "tm.Store",
               "name": "Datenbank",
-              "description": "",
+              "description": "Lokal",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
@@ -1064,7 +1055,7 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Benutzereingaben / Ergebnisse\nPDF-Download",
+              "name": "Benutzereingaben / Ergebnisse\nPDF-Download\nBackup erstellen/ Restore starten\n",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
@@ -1099,7 +1090,7 @@
               }
             },
             "labels": [
-              "Benutzereingaben / Ergebnisse\nPDF-Download"
+              "Benutzereingaben / Ergebnisse\nPDF-Download\nBackup erstellen/ Restore starten\n"
             ],
             "id": "d7608599-bb48-4434-9790-b87a8c513554",
             "source": {
@@ -1132,7 +1123,7 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "HTTPS: Berechnen, Speichern, Abruf per ID / Ergebnis",
+              "name": "HTTPS: Berechnen, Speichern, Abruf per ID / Ergebnis\nBackup-/Restore-Anfrage",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
@@ -1149,7 +1140,7 @@
               ]
             },
             "labels": [
-              "HTTPS: Berechnen, Speichern, Abruf per ID / Ergebnis"
+              "HTTPS: Berechnen, Speichern, Abruf per ID / Ergebnis\nBackup-/Restore-Anfrage"
             ],
             "id": "0d59e359-850b-42dc-8810-a6d9b6cef51f",
             "source": {
@@ -1237,7 +1228,7 @@
             "data": {
               "type": "tm.Flow",
               "name": "Berechnungsergebnisse + \nAbruf-ID speichern / \nBerechnung per ID abrufen",
-              "description": "",
+              "description": "Sicherung schreiben / lesen · Integritätsprüfung",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
