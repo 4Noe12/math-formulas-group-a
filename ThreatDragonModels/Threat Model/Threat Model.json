@@ -1483,6 +1483,16 @@
             "target": {
               "cell": "9b79d36b-b9f5-4d45-a7df-f6df143d9fce",
               "port": "50b35fdf-d492-4803-b373-4e15312f9cb7"
+            },
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove",
+                "vertices",
+                "source-arrowhead",
+                "target-arrowhead"
+              ],
+              "name": null
             }
           }
         ],
